@@ -1,0 +1,23 @@
+<h2><%=l(:label_messages_plural)%></h2>
+
+<% if @messages.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+  <% @messages.each do |news| %>
+    <article class="news-article" data-collapse>
+      <h3>
+        <%= news.subject %> - <%= news.created_at.to_parsi.strftime "%A %d %B %Y" %>
+      </h3>
+      <div class="wiki">
+        <%= news.messages.first.body.html_safe %>
+      </div>
+    </article>
+  <% end %>
+<% end %>
+<span class="pagination"><%= pagination_links_full @messages_pages %></span>
+
+<% html_title(l(:label_news_plural)) -%>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag "jquery_collapse", :plugin => 'sarmad_miscellaneous' %>
+<% end %>
