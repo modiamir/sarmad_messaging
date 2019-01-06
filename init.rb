@@ -1,11 +1,11 @@
 require_dependency 'sarmad_messaging/sarmad_messaging'
 Redmine::Plugin.register :sarmad_messaging do
-  name 'Sarmad Messaging plugin'
-  author 'Author name'
-  description 'This is a plugin for Redmine'
-  version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  name 'پلاگین پیامرسان سرمد'
+  author 'SarmadBS'
+  description ''
+  version '0.9.0'
+  url 'http://sarmadbs.com'
+  author_url 'mailto:plugin@satrapp.com'
 
   Redmine::MenuManager.map :account_menu do |menu|
     menu.push(:messages, { controller: 'mailboxer_messages', action: 'index' },
