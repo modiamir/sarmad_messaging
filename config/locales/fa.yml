@@ -1,0 +1,8 @@
+fa:
+  reminder_queries: تنظیمات یاداورها
+  messages: پیامهای سیستم
+  label_messages_plural: پیامهای سیستم
+  label_reminder_query_plural: تنظیمات یادآورها
+  label_reminder_query_new: یادآور جدید
+  label_visibility_author: هشدار به سازنده تسک
+  label_visibility_assignee: هشدار به مجری تسک
