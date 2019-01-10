@@ -27,9 +27,32 @@ module SarmadMessaging
             body = m.text_part.body
             if body && email && subject
               admin = User.where(admin: true).first
-              receiver = User.find_by_mail(email)
-              if receiver && admin
-                admin.send_message(receiver, body.to_s, subject)
+              if email.is_a?(Array)
+                email.each do |e|
+                  if e.is_a?(User)
+                    receiver = e
+                    if receiver && admin
+                      admin.send_message(receiver, body.to_s, subject)
+                    end
+                  else
+                    receiver = User.find_by_mail(e)
+                    if receiver && admin
+                      admin.send_message(receiver, body.to_s, subject)
+                    end
+                  end
+                end
+              else
+                if email.is_a?(User)
+                  receiver = email
+                  if receiver && admin
+                    admin.send_message(receiver, body.to_s, subject)
+                  end
+                else
+                  receiver = User.find_by_mail(email)
+                  if receiver && admin
+                    admin.send_message(receiver, body.to_s, subject)
+                  end
+                end
               end
             end
           rescue
