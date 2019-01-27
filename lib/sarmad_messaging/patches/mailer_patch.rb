@@ -24,7 +24,11 @@ module SarmadMessaging
           end
           m = mail_without_sarmad_messaging(headers, &block)
           begin
-            body = m.text_part.body
+            begin
+              body = Nokogiri::HTML(m.html_part.body.to_s).css('body').inner_html
+            rescue
+              body = m.text_part.body
+            end
             if body && email && subject
               admin = User.where(admin: true).first
               if email.is_a?(Array)
