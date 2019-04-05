@@ -36,12 +36,12 @@ module SarmadMessaging
                   if e.is_a?(User)
                     receiver = e
                     if receiver && admin
-                      admin.send_message(receiver, body.to_s, subject)
+                      send_message(admin, receiver, body.to_s, subject, headers)
                     end
                   else
                     receiver = User.find_by_mail(e)
                     if receiver && admin
-                      admin.send_message(receiver, body.to_s, subject)
+                      send_message(admin, receiver, body.to_s, subject, headers)
                     end
                   end
                 end
@@ -49,17 +49,23 @@ module SarmadMessaging
                 if email.is_a?(User)
                   receiver = email
                   if receiver && admin
-                    admin.send_message(receiver, body.to_s, subject)
+                    send_message(admin, receiver, body.to_s, subject, headers)
                   end
                 else
                   receiver = User.find_by_mail(email)
                   if receiver && admin
-                    admin.send_message(receiver, body.to_s, subject)
+                    send_message(admin, receiver, body.to_s, subject, headers)
                   end
                 end
               end
             end
           rescue
+          end
+        end
+        
+        def send_message(sender, receiver, body, subject, headers)
+          if Setting.plugin_sarmad_messaging['all_messages_inbox'] == 'on' || [:reminder, :bottleneck_warning].include?(headers[:message_type])
+            sender.send_message(receiver, body, subject)
           end
         end
       end

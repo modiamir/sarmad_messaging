@@ -6,6 +6,7 @@ Redmine::Plugin.register :sarmad_messaging do
   version '0.9.0'
   url 'http://sarmadbs.com'
   author_url 'mailto:plugin@satrapp.com'
+  settings :default => {'empty' => true}, :partial => 'settings/sarmad_messaging_settings'
 
   Redmine::MenuManager.map :account_menu do |menu|
     menu.push(:messages, { controller: 'mailboxer_messages', action: 'index' },
