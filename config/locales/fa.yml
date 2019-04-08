@@ -7,5 +7,6 @@ fa:
   label_visibility_author: هشدار به سازنده تسک
   label_visibility_assignee: هشدار به مجری تسک
   mail_subject_critical_project: هشدار پروژه بحرانی
+  mail_subject_warning_project: هشدار پروژه عقب افتاده
   time_progress: پیشرفت زمانی پروژه
   actual_progress: پیشرفت واقعی پروژه
