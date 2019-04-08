@@ -6,3 +6,6 @@ fa:
   label_reminder_query_new: یادآور جدید
   label_visibility_author: هشدار به سازنده تسک
   label_visibility_assignee: هشدار به مجری تسک
+  mail_subject_critical_project: هشدار پروژه بحرانی
+  time_progress: پیشرفت زمانی پروژه
+  actual_progress: پیشرفت واقعی پروژه
