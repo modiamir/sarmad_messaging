@@ -1,11 +1,12 @@
-<h2><%=l(:label_messages_plural)%></h2>
+<h2><%=l(:label_messages_plural)%> - <%= @unread_messages_count %> <%=l(:unread_messages)%> </h2>
 
 <% if @messages.empty? %>
   <p class="nodata"><%= l(:label_no_data) %></p>
 <% else %>
   <% @messages.each do |news| %>
-    <article class="news-article" data-collapse>
-      <h3>
+    <% background_color = news.is_unread?(User.current) ? 'aliceblue': 'none' %>
+    <article class="message news-article" data-collapse style="background-color: <%= background_color %>">
+      <h3 data-id="<%= news.id %>" data-requested="false">
         <%= news.subject %> - <%= news.created_at.to_parsi.strftime "%A %d %B %Y" %>
       </h3>
       <div class="wiki" style="white-space: pre-line;">
@@ -21,4 +22,26 @@
 
 <% content_for :header_tags do %>
   <%= javascript_include_tag "jquery_collapse", :plugin => 'sarmad_miscellaneous' %>
+  <script type="application/javascript">
+    $(document).ready(function () {
+        $(document).on('click', 'article.message h3', function () {
+            if (false === $(this).data('requested')) {
+                console.info('clicked', $(this).data('id'));
+
+                $.ajax({
+                    url: "/mailboxer_messages/"+$(this).data('id'),
+                    method: 'PUT',
+                    success: function (response) {
+                        console.info('success', response)
+                    },
+                    error: function (response) {
+                        console.info('error', response)
+                    }
+                });
+
+                $(this).data('requested', true);
+            }
+        })
+    })
+  </script>
 <% end %>
